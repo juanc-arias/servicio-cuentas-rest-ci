@@ -1,0 +1,20 @@
+services:
+  legacy-core:
+    build:
+      context: ./legacy_core_service
+      dockerfile: Dockerfile
+    container_name: legacy-core-service
+    ports:
+      - "9000:9000"
+
+  wrapper-api:
+    build:
+      context: ./wrapper_service
+      dockerfile: Dockerfile
+    container_name: wrapper-api-service
+    ports:
+      - "8000:8000"
+    environment:
+      - LEGACY_CORE_URL=http://legacy-core:9000
+    depends_on:
+      - legacy-core
