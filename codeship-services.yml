@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  legacy-core:
+    build:
+      image: servicio-cuentas-rest-ci/legacy-core
+      context: ./legacy_core_service
+      dockerfile: Dockerfile
+
+  wrapper-api:
+    build:
+      image: servicio-cuentas-rest-ci/wrapper-api
+      context: ./wrapper_service
+      dockerfile: Dockerfile
+    environment:
+      LEGACY_CORE_URL: http://legacy-core:9000
+
+  test-runner:
+    image: python:3.13-slim

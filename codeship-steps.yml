@@ -1,0 +1,6 @@
+- name: validar-integracion-wrapper-core
+  service: test-runner
+  command: sh -c "
+    sleep 15 &&
+    CI_BASE_URL=http://wrapper-api:8000 python ci/test_integration.py
+    "

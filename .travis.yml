@@ -1,0 +1,16 @@
+dist: focal
+
+language: python
+
+python:
+  - "3.11"
+
+services:
+  - docker
+
+before_script:
+  - docker --version
+  - docker compose version || docker-compose --version
+
+script:
+  - bash ci/run-docker-compose-checks.sh
